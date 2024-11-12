@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Auth from "./components/auth/Auth";
 import MainDashBoard from "./components/main_dashBoard/DashBoard";
 import Container from "./components/container/Container";
-import Admin from "./components/admin/Admin";
+import Admin from "./components/admin/list/Admin";
 import Comment from "./components/Comment";
 import Editor from "./components/Editor";
 import Member from "./components/Member";
