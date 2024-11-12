@@ -14,6 +14,6 @@ export enum AdminRole {
  * @enum DISABLED 비활성화
  * */
 export enum AdminStatus {
-  ENABLED,
   DISABLED,
+  ENABLED,
 }
