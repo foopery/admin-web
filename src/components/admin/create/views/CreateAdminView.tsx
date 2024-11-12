@@ -4,7 +4,7 @@ import { AdminRole, AdminStatus } from "../../admin.enums";
 import { inputValidator } from "../../../../_functions/loginForm-validator";
 import Body from "../../../../_common/Body";
 import { managementAdminQuery } from "../_core/management-admin.query";
-import { ICreateAdmin } from "../_interface/admin.create.interface";
+import { ICreateAdmin } from "../../_interface/admin.create.interface";
 
 export default function CreateAdminView() {
   /* Admin Create Mutate Query */
@@ -14,7 +14,15 @@ export default function CreateAdminView() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ICreateAdmin>({ mode: "onBlur" });
+  } = useForm<ICreateAdmin>({
+    mode: "onBlur",
+    /* 현재 날짜로 기본값 설정 */
+    defaultValues: {
+      birthDate: new Date().toISOString().split("T")[0],
+      profileImageUrl:
+        "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
+    },
+  });
 
   /* Function */
   /** 관리자 생성 버튼핸들러 함수 */
