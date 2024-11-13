@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { AdminRole, AdminStatus } from "../../admin.enums";
 import { inputValidator } from "../../../../_functions/loginForm-validator";
 import Body from "../../../../_common/Body";
-import { managementAdminQuery } from "../_core/management-admin.query";
-import { ICreateAdmin } from "../../_interface/admin.create.interface";
+import { managementAdminQuery } from "../../_core/management-admin.query";
+import { ICreateAdmin } from "../../_interface/admin.interface";
 
 export default function CreateAdminView() {
   /* Admin Create Mutate Query */
