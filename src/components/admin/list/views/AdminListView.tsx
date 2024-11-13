@@ -1,21 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
-import { IApiResponseAdminList } from "../../_interface/admin-list.interface";
+import { IApiResponseAdminList } from "../../_interface/response.interface";
 import Body from "../../../../_common/Body";
-import { IAdmin, IUpdateAdmin } from "../../_interface/admin.create.interface";
-import { AdminRole } from "../../admin.enums";
+import { IAdmin, IUpdateAdmin } from "../../_interface/admin.interface";
 import React from "react";
 import Toggle from "../../../Toggle";
-import { managementAdminQuery } from "../../create/_core/management-admin.query";
+import { managementAdminQuery } from "../../_core/management-admin.query";
+import { ADMIN_ROLE } from "../../admin.constant";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+import dayjs from "dayjs";
+
+/* DayJS 시간차이 치환 */
+dayjs.extend(relativeTime);
+/* "ko" 한국시간 기준 */
+dayjs.locale("ko");
 
 export default function AdminListView({ data }: { data: IApiResponseAdminList<IAdmin[]> }) {
   const navigate = useNavigate();
   const { currentPage, totalPage } = data.meta;
   console.log("TEST", data);
+
   const { mutate: modify } = managementAdminQuery.useUpdate();
 
-  function modifyHandler(id: number, data: IUpdateAdmin) {
-    modify({ data, id });
-  }
+  const editHandler = (putData: IUpdateAdmin, id: number) => {
+    modify({ data: putData, id });
+  };
 
   return (
     <Body
@@ -36,14 +45,14 @@ export default function AdminListView({ data }: { data: IApiResponseAdminList<IA
             <table className={`w-full text-sm rounded-md overflow-hidden text-gray-700`}>
               <thead>
                 <tr className={`text-gray-700 text-left border-b `}>
-                  <th className={`p-3 font-semibold sm:hidden`}>name</th>
-                  <th className={`p-3 font-semibold`}>role</th>
-                  <th className={`p-3 font-semibold sm:hidden`}>loginId</th>
-                  <th className={`p-3 font-semibold sm:hidden`}>birthDate</th>
-                  <th className={`p-3 font-semibold sm:hidden`}>createdAt</th>
-                  <th className={`p-3 font-semibold sm:hidden`}>updatedAt</th>
-                  <th className={`p-3 font-semibold`}>lastLogs</th>
-                  <th className={`p-3 font-semibold flex gap-1.5 items-center`}>status</th>
+                  <th className={`p-3 font-semibold sm:hidden`}>이름</th>
+                  <th className={`p-3 font-semibold`}>권한</th>
+                  <th className={`p-3 font-semibold sm:hidden`}>로그인 아이디</th>
+                  <th className={`p-3 font-semibold sm:hidden`}>생년월일</th>
+                  <th className={`p-3 font-semibold sm:hidden`}>생성일</th>
+                  <th className={`p-3 font-semibold sm:hidden`}>수정일</th>
+                  <th className={`p-3 font-semibold`}>최근 로그인일</th>
+                  <th className={`p-3 font-semibold flex gap-1.5 items-center`}>상태</th>
                 </tr>
                 {data.data.map((v, i) => (
                   <tr className={`hover:bg-gray-50 transition duration-200`} key={i}>
@@ -52,15 +61,15 @@ export default function AdminListView({ data }: { data: IApiResponseAdminList<IA
                       {v.name}
                     </td>
                     <td className={`p-3 text-gray-700 cursor-pointer`}>
-                      <Link to={`/container/:id`}>{AdminRole[v.role]}</Link>
+                      <Link to={`/container/:id`}>{ADMIN_ROLE[v.role]}</Link>
                     </td>
                     <td className={`p-3 sm:hidden`}>{v.loginId}</td>
                     <td className={`p-3 sm:hidden`}>{v.birthDate}</td>
-                    <td className={`p-3 sm:hidden`}>{v.createdAt}</td>
-                    <td className={`p-3 sm:hidden`}>{v.updatedAt}</td>
-                    <td className={`p-3 sm:hidden`}>{v.lastLoginAt}</td>
+                    <td className={`p-3 sm:hidden`}>{dayjs(v.createdAt).fromNow()}</td>
+                    <td className={`p-3 sm:hidden`}>{dayjs(v.updatedAt).fromNow()}</td>
+                    <td className={`p-3 sm:hidden`}>{dayjs(v.lastLoginAt).fromNow()}</td>
                     <td className={`p-3`}>
-                      <Toggle checked={Boolean(v.status)} onChange={(e) => modifyHandler(v.id, { status: Number(e.target.checked) })} />
+                      <Toggle checked={Boolean(v.status)} onChange={(e) => editHandler({ status: Number(e.target.checked) }, v.id)} />
                     </td>
                   </tr>
                 ))}
