@@ -1,8 +1,6 @@
-export enum AdminMgrFindListSort {
-  CREATED_AT_ASC, // 오름차순
-  CREATED_AT_DESC, // 내림차순
-}
-
+/**
+ * 관리자 API 서버반환 인터페이스
+ * */
 export interface IApiResponseAdminList<T> {
   data: T;
   meta: {
@@ -14,6 +12,9 @@ export interface IApiResponseAdminList<T> {
   message: string;
 }
 
+/**
+ * 관리자 수정 API 서버반환 인터페이스
+ * */
 export interface IApiUpdateResponseAdmin {
   message: string;
 }
