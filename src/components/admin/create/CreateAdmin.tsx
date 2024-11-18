@@ -1,5 +1,5 @@
 import CreateAdminView from "./views/CreateAdminView";
 
-export default function createAdmin() {
+export default function CreateAdmin() {
   return <CreateAdminView />;
 }
