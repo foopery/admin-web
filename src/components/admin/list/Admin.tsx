@@ -2,13 +2,14 @@ import AdminListView from "./views/AdminListView";
 import { useSearchParams } from "react-router-dom";
 import AdminListErrorView from "./views/AdminListErrorView";
 import AdminListLoadingView from "./views/AdminListLoadingView";
-import { managementAdminQuery } from "../_core/management-admin.query";
+import { adminQuery } from "../_core/admin.query";
+import { adminHandler } from "../_core/admin.handler";
 
 export default function Admin() {
   const [queryPage] = useSearchParams();
   const page = queryPage.get("page") || "1";
 
-  const { data, status } = managementAdminQuery.useGets(page);
+  const { data, status } = adminQuery.useGets(page);
 
   switch (status) {
     case "error":
@@ -16,7 +17,7 @@ export default function Admin() {
     case "pending":
       return <AdminListLoadingView />;
     case "success":
-      return <AdminListView data={data} />;
+      return <AdminListView data={data} updateHandler={adminHandler.useUpdateHandler} />;
     default:
       return null;
   }
