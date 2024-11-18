@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function Toggle({ checked, disabled, onChange }: { checked?: boolean; disabled?: boolean; onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void }) {
-  const [isOn, setIsOn] = useState(checked);
-  const toggleHandler = () => {
-    setIsOn(!isOn);
-  };
+export default function Toggle({
+  checked,
+  disabled,
+  onChange,
+  onClick,
+}: {
+  checked?: boolean;
+  disabled?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void;
+}) {
   return (
     <>
       <label className="inline-flex items-center cursor-pointer">
-        <input type="checkbox" defaultChecked={isOn} disabled={disabled} onChange={onChange} onClick={toggleHandler} className="sr-only peer" />
+        <input type="checkbox" checked={checked} disabled={disabled} onChange={onChange} onClick={onClick} className="sr-only peer" />
         <div
           className={`relative w-11 h-6 bg-gray-200 rounded-full peer dark:bg-gray-400 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#3c81f4]`}
         ></div>
