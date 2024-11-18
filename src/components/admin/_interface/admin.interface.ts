@@ -36,8 +36,27 @@ export interface ICreateAdmin {
 export interface IUpdateAdmin {
   status?: AdminStatus; // 관리자 상태
   role?: AdminRole; // 관리자 권한
-  loginId?: string; // 로그인 아이디
-  name?: string; // 이름
-  birthDate?: string; // 생년월일
-  profileImageUrl?: string; // 프로필 이미지
+  loginId?: string | null; // 로그인 아이디
+  name?: string | null; // 이름
+  birthDate?: string | null; // 생년월일
+  profileImageUrl?: string | null; // 프로필 이미지
+  password?: string | null; // 비밀번호
+}
+
+/**
+ * 관리자 조회인터페이스
+ *
+ * */
+export interface IFindUniqueAdmin {
+  id: number;
+  status: AdminStatus;
+  role: AdminRole;
+  loginId: string | null;
+  name: string | null;
+  birthDate: string | null;
+  profileImageUrl: string | null;
+  lastLoginAt: string | null;
+  createdAt: string;
+  updatedAt: string | null;
+  deletedAt: string | null;
 }
