@@ -20,4 +20,10 @@ export const inputValidator = {
       message: "이름은 한글만 입력해주세요.",
     },
   },
+  updatePassword: {
+    pattern: {
+      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]+$/,
+      message: "비밀번호는 영문, 숫자, 그리고 특수문자를 포함하여 최소 8자 이상으로 설정해주세요.",
+    },
+  },
 };
