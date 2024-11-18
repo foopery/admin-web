@@ -1,9 +1,9 @@
-import { IAdmin, ICreateAdmin, IUpdateAdmin } from "../_interface/admin.interface";
+import { IAdmin, ICreateAdmin, IFindUniqueAdmin, IUpdateAdmin } from "../_interface/admin.interface";
 import { apiInstance } from "../../../_common/api.instance";
-import { IApiResponseAdminList, IApiUpdateResponseAdmin } from "../_interface/response.interface";
+import { IApiMgrFindResponseAdmin, IApiResponseAdminList, IApiUpdateResponseAdmin } from "../_interface/response.interface";
 import { AdminMgrFindListSort } from "../admin.enums";
 
-export const managementAdminApi = {
+export const adminApi = {
   /* 관리자 생성 */
   create: async function (adminData: ICreateAdmin) {
     const { data } = await apiInstance.post("/management/admins", adminData);
@@ -20,6 +20,11 @@ export const managementAdminApi = {
       },
     });
     // console.log("List API GET DATA", data);
+    return data;
+  },
+  /* 관리자 단일조회 */
+  get: async function (id: number) {
+    const { data } = await apiInstance.get<IApiMgrFindResponseAdmin<IFindUniqueAdmin>>(`/management/admins/${id}`);
     return data;
   },
   /* 관리자 수정 */
