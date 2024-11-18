@@ -1,13 +1,13 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ICreateAdmin, IUpdateAdmin } from "../_interface/admin.interface";
-import { managementAdminApi } from "./management-admin.api";
+import { adminApi } from "./admin.api";
 import { queryClient } from "../../../App";
 
-export const managementAdminQuery = {
+export const adminQuery = {
   /* 관리자 생성 */
   useCreate: function () {
     return useMutation({
-      mutationFn: (data: ICreateAdmin) => managementAdminApi.create(data),
+      mutationFn: (data: ICreateAdmin) => adminApi.create(data),
       onSuccess: (v) => {
         // console.log("Query Success", v.message);
         alert(v.message);
@@ -20,14 +20,22 @@ export const managementAdminQuery = {
   /* 관리자 목록조회 */
   useGets: function (page: string) {
     return useQuery({
-      queryFn: () => managementAdminApi.gets(page),
+      queryFn: () => adminApi.gets(page),
       queryKey: ["AdminList", page],
+    });
+  },
+  /* 관리자 단일조회 */
+  useGet: function (id: number) {
+    return useQuery({
+      queryFn: () => adminApi.get(id),
+      queryKey: ["AdminUnique", id],
+      select: ({ data }) => data,
     });
   },
   /* 관리자 수정 */
   useUpdate: function () {
     return useMutation({
-      mutationFn: ({ data, id }: { data: IUpdateAdmin; id: number }) => managementAdminApi.update(data, id),
+      mutationFn: ({ data, id }: { data: IUpdateAdmin; id: number }) => adminApi.update(data, id),
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["AdminList"] });
       },
