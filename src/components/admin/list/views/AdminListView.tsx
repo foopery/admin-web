@@ -3,8 +3,7 @@ import { IApiResponseAdminList } from "../../_interface/response.interface";
 import Body from "../../../../_common/Body";
 import { IAdmin, IUpdateAdmin } from "../../_interface/admin.interface";
 import React from "react";
-import Toggle from "../../../Toggle";
-import { managementAdminQuery } from "../../_core/management-admin.query";
+import Toggle from "../../../../_common/Toggle";
 import { ADMIN_ROLE } from "../../admin.constant";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ko";
@@ -15,16 +14,10 @@ dayjs.extend(relativeTime);
 /* "ko" 한국시간 기준 */
 dayjs.locale("ko");
 
-export default function AdminListView({ data }: { data: IApiResponseAdminList<IAdmin[]> }) {
+export default function AdminListView({ data, updateHandler }: { data: IApiResponseAdminList<IAdmin[]>; updateHandler: (data: IUpdateAdmin, id: number) => void }) {
   const navigate = useNavigate();
   const { currentPage, totalPage } = data.meta;
   console.log("TEST", data);
-
-  const { mutate: modify } = managementAdminQuery.useUpdate();
-
-  const editHandler = (putData: IUpdateAdmin, id: number) => {
-    modify({ data: putData, id });
-  };
 
   return (
     <Body
@@ -33,7 +26,7 @@ export default function AdminListView({ data }: { data: IApiResponseAdminList<IA
       rightHeaderRender={
         <button
           className={`bg-[#3c81f4] text-white font-semibold rounded-lg h-[2rem] text-xs shadow-md  w-[6rem] hover:bg-blue-700 duration-500`}
-          onClick={() => navigate("/admin/management/create")}
+          onClick={() => navigate("/admin/management/write")}
         >
           관리자 생성
         </button>
@@ -58,18 +51,16 @@ export default function AdminListView({ data }: { data: IApiResponseAdminList<IA
                   <tr className={`hover:bg-gray-50 transition duration-200`} key={i}>
                     <td className={`p-3 gap-3 text-gray-700 flex items-center `}>
                       <img className={`w-[1.5rem] h-[1.5rem] rounded-full`} src={v.profileImageUrl || "X"} />
-                      {v.name}
+                      <Link to={`/admin/management/${v.id}`}>{v.name}</Link>
                     </td>
-                    <td className={`p-3 text-gray-700 cursor-pointer`}>
-                      <Link to={`/container/:id`}>{ADMIN_ROLE[v.role]}</Link>
-                    </td>
+                    <td className={`p-3 text-gray-700`}>{ADMIN_ROLE[v.role]}</td>
                     <td className={`p-3 sm:hidden`}>{v.loginId}</td>
                     <td className={`p-3 sm:hidden`}>{v.birthDate}</td>
                     <td className={`p-3 sm:hidden`}>{dayjs(v.createdAt).fromNow()}</td>
                     <td className={`p-3 sm:hidden`}>{dayjs(v.updatedAt).fromNow()}</td>
                     <td className={`p-3 sm:hidden`}>{dayjs(v.lastLoginAt).fromNow()}</td>
                     <td className={`p-3`}>
-                      <Toggle checked={Boolean(v.status)} onChange={(e) => editHandler({ status: Number(e.target.checked) }, v.id)} />
+                      <Toggle checked={Boolean(v.status)} onChange={(e) => updateHandler({ status: Number(e.target.checked) }, v.id)} />
                     </td>
                   </tr>
                 ))}
