@@ -3,12 +3,12 @@ import { useForm } from "react-hook-form";
 import { AdminRole, AdminStatus } from "../../admin.enums";
 import { inputValidator } from "../../../../_functions/loginForm-validator";
 import Body from "../../../../_common/Body";
-import { managementAdminQuery } from "../../_core/management-admin.query";
+import { adminQuery } from "../../_core/admin.query";
 import { ICreateAdmin } from "../../_interface/admin.interface";
 
 export default function CreateAdminView() {
   /* Admin Create Mutate Query */
-  const { mutate: create } = managementAdminQuery.useCreate();
+  const { mutate: create } = adminQuery.useCreate();
   /* useForm */
   const {
     register,
@@ -19,6 +19,7 @@ export default function CreateAdminView() {
     /* 현재 날짜로 기본값 설정 */
     defaultValues: {
       birthDate: new Date().toISOString().split("T")[0],
+      /* 기본 프로필 사진 */
       profileImageUrl:
         "https://images.ctfassets.net/h6goo9gw1hh6/2sNZtFAWOdP1lmQ33VwRN3/24e953b920a9cd0ff2e1d587742a2472/1-intro-photo-final.jpg?w=1200&h=992&fl=progressive&q=70&fm=jpg",
     },
