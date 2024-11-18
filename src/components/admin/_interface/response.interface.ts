@@ -18,3 +18,11 @@ export interface IApiResponseAdminList<T> {
 export interface IApiUpdateResponseAdmin {
   message: string;
 }
+
+/**
+ *  관리자 조회 API 서버반환 인터페이스
+ * */
+export interface IApiMgrFindResponseAdmin<T> {
+  data: T;
+  message: string;
+}
