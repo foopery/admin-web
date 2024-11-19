@@ -8,7 +8,6 @@ import { adminHandler } from "../_core/admin.handler";
 export default function Admin() {
   const [queryPage] = useSearchParams();
   const page = queryPage.get("page") || "1";
-
   const { data, status } = adminQuery.useGets(page);
 
   switch (status) {

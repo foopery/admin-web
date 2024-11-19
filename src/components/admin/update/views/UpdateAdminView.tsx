@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 
 export default function UpdateAdminView({ data }: { data: IFindUniqueAdmin }) {
   const { mutate: update } = adminQuery.useUpdate();
-  console.log(data);
+  // console.log(data);
   /* useForm */
   const {
     register,
@@ -27,7 +27,7 @@ export default function UpdateAdminView({ data }: { data: IFindUniqueAdmin }) {
     // if (!formData.password) {
     //   delete formData.password;
     // }
-    console.log("보내는 데이터:", formData);
+    // console.log("보내는 데이터:", formData);
     update({ data: formData, id: data.id });
   };
   return (

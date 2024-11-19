@@ -7,7 +7,7 @@ import { commonHandler } from "../../../../_common/common-handler";
 
 export default function AdminGetView({ data }: { data: IFindUniqueAdmin }) {
   /* 경로는 admin/management/${유저의 아이디값} */
-  console.log("Get Data", data);
+  // console.log("Get Data", data);
   const navigate = commonHandler.useNavigator();
   return (
     <Body

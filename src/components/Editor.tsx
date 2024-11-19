@@ -12,15 +12,15 @@ function Editor() {
   /** Functions */
   const eventHandler = (title: React.ChangeEvent<HTMLInputElement>) => {
     setData({ ...data, title: title.target.value });
-    console.log(title.target.value);
+    // console.log(title.target.value);
   };
   function buttonHandler() {
-    console.log(`Button Click Console :`, data.title);
+    // console.log(`Button Click Console :`, data.title);
   }
 
   function codeHandler(code: string) {
     setData({ ...data, code: code });
-    console.log(code);
+    // console.log(code);
   }
 
   return (

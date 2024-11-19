@@ -17,7 +17,7 @@ dayjs.locale("ko");
 export default function AdminListView({ data, updateHandler }: { data: IApiResponseAdminList<IAdmin[]>; updateHandler: (data: IUpdateAdmin, id: number) => void }) {
   const navigate = useNavigate();
   const { currentPage, totalPage } = data.meta;
-  console.log("TEST", data);
+  // console.log("TEST", data);
 
   return (
     <Body
