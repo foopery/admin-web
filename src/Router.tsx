@@ -13,6 +13,8 @@ import IssueDetail from "./components/issue/detail/IssueDetail";
 import CreateAdmin from "./components/admin/create/CreateAdmin";
 import AdminGet from "./components/admin/get/AdminGet";
 import UpdateAdmin from "./components/admin/update/UpdateAdmin";
+import AdminProfile from "./components/admin/profile/AdminProfile";
+import AdminPassword from "./components/admin/password/AdminPassword";
 
 export default function Router() {
   const routers: { path: string; element: React.ReactNode; key: string }[] = [
@@ -80,6 +82,16 @@ export default function Router() {
       path: "/admin/management/:id/modify", // 관리자 수정페이지
       element: <UpdateAdmin />,
       key: "/admin/management/:id/modify",
+    },
+    {
+      path: "/admin/management/:id/profile", // 관리자 프로필 수정
+      element: <AdminProfile />,
+      key: "/admin/management/:id/profile",
+    },
+    {
+      path: "/admin/management/:id/password", // 관리자 비밀번호 변경
+      element: <AdminPassword />,
+      key: "/admin/management/:id/password",
     },
   ];
   return (
