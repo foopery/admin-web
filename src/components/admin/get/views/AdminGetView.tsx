@@ -56,10 +56,12 @@ export default function AdminGetView({ data }: { data: IFindUniqueAdmin }) {
               <tr className={`flex gap-[6rem] sm:flex-col sm:gap-[0rem]`}>
                 <td className="py-2 w-1/3">
                   <label htmlFor="profileImageUrl" className={`whitespace-nowrap`}>
-                    프로필 이미지주소
+                    프로필 이미지
                   </label>
                 </td>
-                <td className="flex items-center px-3 w-[25rem] h-[3rem] rounded-md sm:w-[40svh]">{data.profileImageUrl}</td>
+                <td className="flex items-center px-3 w-[25rem] h-[3rem] rounded-md sm:w-[40svh]">
+                  <img className={`w-[2rem] h-[2rem] rounded-full`} src={data.profileImageUrl || "X"} />
+                </td>
               </tr>
               {/* Role */}
               <tr className={`flex gap-[6rem] sm:flex-col sm:gap-[0rem]`}>
