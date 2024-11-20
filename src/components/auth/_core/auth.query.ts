@@ -11,11 +11,14 @@ export const authQuery = {
       onSuccess: (v) => {
         navigate("/");
         const token = v.data.accessToken;
+        console.log("쿼리 토큰", token);
         // console.log(token);
         selectCookie.setCookie({
           name: "Token",
           value: token,
-          option: "http://localhost:3000",
+          option: {
+            path: "/",
+          },
         });
       },
       onError: (error: any) => {
