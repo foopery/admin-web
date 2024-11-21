@@ -16,7 +16,7 @@ export default function AdminGetView({ data }: { data: IFindUniqueAdmin }) {
       rightHeaderRender={
         <button
           className={`bg-[#3c81f4] text-white font-semibold rounded-lg h-[2rem] text-xs shadow-md  w-[6rem] hover:bg-blue-700 duration-500`}
-          onClick={() => navigate(`/admin/management/${data.id}/modify`)}
+          onClick={() => navigate(`/management/admin/${data.id}/modify`)}
         >
           관리자 수정
         </button>
