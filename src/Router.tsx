@@ -14,7 +14,6 @@ import CreateAdmin from "./components/admin/create/CreateAdmin";
 import AdminGet from "./components/admin/get/AdminGet";
 import UpdateAdmin from "./components/admin/update/UpdateAdmin";
 import AdminProfile from "./components/admin/profile/AdminProfile";
-import AdminPassword from "./components/admin/password/AdminPassword";
 
 export default function Router() {
   const routers: { path: string; element: React.ReactNode; key: string }[] = [
@@ -69,29 +68,24 @@ export default function Router() {
       key: "issue-detail",
     },
     {
-      path: "/admin/management/write", // 관리자 생성페이지
+      path: "/management/admin/write", // 관리자 생성페이지
       element: <CreateAdmin />,
-      key: "/admin/management/write",
+      key: "/management/admin/write",
     },
     {
-      path: "/admin/management/:id", // 관리자 상세페이지
+      path: "/management/admin/:id", // 관리자 상세페이지
       element: <AdminGet />,
-      key: "/admin/management/:id",
+      key: "/management/admin/:id",
     },
     {
-      path: "/admin/management/:id/modify", // 관리자 수정페이지
+      path: "/management/admin/:id/modify", // 관리자 수정페이지
       element: <UpdateAdmin />,
-      key: "/admin/management/:id/modify",
+      key: "/management/admin/:id/modify",
     },
     {
-      path: "/admin/management/:id/profile", // 관리자 프로필 수정
+      path: "/management/admin/:id/profile", // 관리자 프로필 수정 --> 파람 ID 제거 예정(payload Verify)
       element: <AdminProfile />,
-      key: "/admin/management/:id/profile",
-    },
-    {
-      path: "/admin/management/:id/password", // 관리자 비밀번호 변경
-      element: <AdminPassword />,
-      key: "/admin/management/:id/password",
+      key: "/management/admin/:id/profile",
     },
   ];
   return (
