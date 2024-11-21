@@ -2,6 +2,7 @@ import { IAdmin, ICreateAdmin, IFindUniqueAdmin, IUpdateAdmin } from "../_interf
 import { apiInstance } from "../../../_common/api.instance";
 import { IApiMgrFindResponseAdmin, IApiResponseAdminList, IApiUpdateResponseAdmin } from "../_interface/response.interface";
 import { AdminMgrFindListSort } from "../admin.enums";
+import { id } from "date-fns/locale";
 
 export const adminApi = {
   /* 관리자 생성 */
@@ -22,14 +23,19 @@ export const adminApi = {
     // console.log("List API GET DATA", data);
     return data;
   },
-  /* 관리자 단일조회 */
+  /* 관리자 조회 */
   get: async function (id: number) {
     const { data } = await apiInstance.get<IApiMgrFindResponseAdmin<IFindUniqueAdmin>>(`/management/admins/${id}`);
     return data;
   },
-  /* 관리자 수정 */
+  /* 관리자 프로필 수정 */
   update: async function (putData: IUpdateAdmin, id: number) {
     const { data } = await apiInstance.put<IApiUpdateResponseAdmin>(`/management/admins/${id}`, putData);
+    return data;
+  },
+  /* 관리자 비밀번호 수정 */
+  passwordUpdate: async function () {
+    const { data } = await apiInstance.patch(`/management/admins/${id}/password`, {});
     return data;
   },
 };
