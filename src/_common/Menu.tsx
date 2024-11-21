@@ -22,7 +22,7 @@ export function Menu({ setToggle, toggle }: { setToggle: React.Dispatch<React.Se
   const path = location.pathname;
   const param = useParams();
   const id = param.id;
-  console.log(id);
+  // console.log(id);
   const MenuItems: IMenuItem[] = [
     {
       path: "/container",
