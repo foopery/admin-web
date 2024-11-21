@@ -45,4 +45,15 @@ export const adminQuery = {
       },
     });
   },
+  /* 관리자 비밀번호 수정 */
+  usePasswordUpdate: function () {
+    return useMutation({
+      mutationFn: () => adminApi.passwordUpdate(),
+      onSuccess: () => {},
+      onError: (error: any) => {
+        console.log("Query Error", error.response.data.message);
+        alert(error.response.data.message);
+      },
+    });
+  },
 };
