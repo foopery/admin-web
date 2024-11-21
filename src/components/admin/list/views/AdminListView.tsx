@@ -51,7 +51,7 @@ export default function AdminListView({ data, updateHandler }: { data: IApiRespo
                   <tr className={`hover:bg-gray-50 transition duration-200`} key={i}>
                     <td className={`p-3 gap-3 text-gray-700 flex items-center `}>
                       <img className={`w-[1.5rem] h-[1.5rem] rounded-full`} src={v.profileImageUrl || "X"} />
-                      <Link to={`/admin/management/${v.id}`}>{v.name}</Link>
+                      <Link to={`/management/admin/${v.id}`}>{v.name}</Link>
                     </td>
                     <td className={`p-3 text-gray-700`}>{ADMIN_ROLE[v.role]}</td>
                     <td className={`p-3 sm:hidden`}>{v.loginId}</td>
